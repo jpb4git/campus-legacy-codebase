@@ -26,10 +26,19 @@ public class GildedRoseRefactorTest {
 
     @Test
     void foo_date_Has_Passed_Quality_Degrade_Twice() {
-        Item[] items = new Item[] { new Item("foo", 0, 10) };
+        Item[] items = new Item[] { new Item("foo", -1, 10) };
         GildedRoseRefactor app = new GildedRoseRefactor(items);
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(8);
+    }
+
+    @Test
+    void foo_date_Lasr_Day_Quality_Degrade_Once() {
+        Item[] items = new Item[] { new Item("foo", 0, 10) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(9);
+        assertThat(app.items[0].sellIn).isEqualTo(-1);
     }
 
     @Test
@@ -64,6 +73,7 @@ public class GildedRoseRefactorTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(29);
     }
+
     //Named Items
 
 
@@ -93,16 +103,7 @@ public class GildedRoseRefactorTest {
         assertThat(app.items[0].quality).isEqualTo(31);
     }
 
-    @Test
-    void brie_Increase_Quality() {
-        Item[] items = new Item[] { new Item("Aged Brie", 20,  10) };
-        GildedRoseRefactor app = new GildedRoseRefactor(items);
-        app.updateQuality();
-        assertThat(app.items[0].quality).isEqualTo(11);
-    }
-
-
-    // 10 days less increase Value
+     // 10 days less increase Value
     @Test
     void backstage_Increase_Quality_By_Two_While_Sellin_Under_Or_Less_10() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10,  30) };
@@ -110,17 +111,6 @@ public class GildedRoseRefactorTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(32);
     }
-
-    @Test
-    void brie_Not_Increase_Quality_By_Two_While_Sellin_Under_Or_Less_10() {
-        Item[] items = new Item[] { new Item("Aged Brie", 10,  30) };
-        GildedRoseRefactor app = new GildedRoseRefactor(items);
-        app.updateQuality();
-        assertThat(app.items[0].quality).isEqualTo(31);
-    }
-
-
-
 
     // 5 days less increase Value
     @Test
@@ -132,6 +122,34 @@ public class GildedRoseRefactorTest {
     }
 
     @Test
+    void backstage_Drop_Quality_To_zero_if_Sellin_equal_Or_Less_Zero() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0,  30) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(0);
+    }
+
+
+    @Test
+    void brie_Increase_Quality() {
+        Item[] items = new Item[] { new Item("Aged Brie", 20,  10) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(11);
+    }
+
+
+
+    @Test
+    void brie_Not_Increase_Quality_By_Two_While_Sellin_Under_Or_Less_10() {
+        Item[] items = new Item[] { new Item("Aged Brie", 10,  30) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(31);
+    }
+
+
+    @Test
     void brie_Not_Increase_Quality_By_Three_While_Sellin_Under_Or_Less_5() {
         Item[] items = new Item[] { new Item("Aged Brie", 5,  30) };
         GildedRoseRefactor app = new GildedRoseRefactor(items);
@@ -140,13 +158,41 @@ public class GildedRoseRefactorTest {
     }
 
     @Test
-    void backstage_Drop_Quality_To_zero_if_Sellin_equal_Or_Less_Zero() {
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0,  30) };
+    void Conjured_Decrease_Quality_By_Two() {
+        Item[] items = new Item[] { new Item("Conjured infact", 5,  30) };
         GildedRoseRefactor app = new GildedRoseRefactor(items);
         app.updateQuality();
-        assertThat(app.items[0].quality).isEqualTo(0);
+        assertThat(app.items[0].quality).isEqualTo(28);
     }
 
+    @Test
+    void Conjured_Decrease_Quality_to_zero() {
+        Item[] items = new Item[] { new Item("Conjured infact", 0,  30) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(28);
+    }
+
+
+    @Test
+    void qualityBounded_0_to_50() {
+        Item[] items = new Item[] { new Item("Conjured infact", 10,  30) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        assertThat(app.qualityBounded(30,-2)).isEqualTo(28);
+        assertThat(app.qualityBounded(33,-2)).isEqualTo(31);
+    }
+    @Test
+    void qualityBounded_0() {
+        Item[] items = new Item[] { new Item("Conjured infact", 10,  0) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        assertThat(app.qualityBounded(0,-2)).isEqualTo(0);
+    }
+    @Test
+    void qualityBounded_50() {
+        Item[] items = new Item[] { new Item("Conjured infact", 10,  55) };
+        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        assertThat(app.qualityBounded(55,-2)).isEqualTo(50);
+    }
 
 
 }

@@ -11,7 +11,7 @@ public class GildedRose {
 
 
 
-
+/*
     public void updateQuality() {
 
 
@@ -83,6 +83,7 @@ public class GildedRose {
 
 
         logger.info("nb elements : "  + items.length );
+        */
 /*
         for (int i = 0; i < items.length; i++) {
             logger.info("loop : " + i);
@@ -173,7 +174,75 @@ public class GildedRose {
         }
 */
 
+
+    public void updateQuality() {
+
+        for (int i = 0; i < items.length; i++) {
+            items[i] = SelectItemByName(items[i]);
+        }
     }
+    private Item SelectItemByName(Item item){
+        if (item.name.contains("Conjured") ){
+
+            int  boundedQuality =  qualityBounded(item.quality,-2);
+            item.quality = boundedQuality ;
+
+        }else if (item.name.contains("Sulfuras") ){
+            //nothing to do
+
+        }else if (item.name.contains("Aged Brie") ){
+            item.quality = qualityBounded(item.quality,1);
+
+        }else if (item.name.contains("Backstage passes") ){
+            // date dépassée
+            if (item.sellIn <= 0){
+                item.quality = qualityBounded(item.quality,-50);
+            }else if (item.sellIn >= 0 && item.sellIn < 6   ){
+                item.quality = qualityBounded(item.quality,3);
+            }else if (item.sellIn > 5 && item.sellIn < 11){
+                item.quality = qualityBounded(item.quality,2);
+            }else{
+                item.quality = qualityBounded(item.quality,1);
+            }
+            // other  unNamedItems
+        }else{
+            if (item.sellIn < 0){
+                item.quality = qualityBounded(item.quality,-2);
+            }else{
+                item.quality = qualityBounded(item.quality,-1);
+            }
+
+        }
+
+        item  = downSellin(item , 1);
+        return item;
+    }
+    /**
+     *
+     * @param currentQuality
+     * @param QualityMouvment
+     * @return
+     */
+    public int qualityBounded(int currentQuality,int QualityMouvment ){
+        int maxQuality = 50;
+        int minQuality = 0;
+        int tempQuality = currentQuality + QualityMouvment;
+
+        if (tempQuality <= maxQuality && tempQuality >= minQuality){
+            return tempQuality;
+        }
+
+        return (Integer.signum(tempQuality) <= 0 ?  minQuality : maxQuality );
+    }
+    private Item downSellin(Item item ,int num){
+        item.sellIn = item.sellIn - num;
+        return item;
+    }
+
+
+
+
+
 
     public Item[] getItems() {
         return items;
