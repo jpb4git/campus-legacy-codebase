@@ -124,7 +124,7 @@ public class GildedRose {
                     }else{
                         items[i].quality  = 0;
                     }
-                    items[i].sellIn--;
+                    items[i].sellIn = items[i].sellIn - 1;
                     // code block
                     break;
                 default:
