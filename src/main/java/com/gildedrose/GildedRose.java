@@ -183,16 +183,11 @@ public class GildedRose {
     }
     private Item SelectItemByName(Item item){
         if (item.name.contains("Conjured") ){
-
-            int  boundedQuality =  qualityBounded(item.quality,-2);
-            item.quality = boundedQuality ;
-
+            item.quality = qualityBounded(item.quality,-2);
         }else if (item.name.contains("Sulfuras") ){
             //nothing to do
-
         }else if (item.name.contains("Aged Brie") ){
             item.quality = qualityBounded(item.quality,1);
-
         }else if (item.name.contains("Backstage passes") ){
             // date dépassée
             if (item.sellIn <= 0){
@@ -213,7 +208,7 @@ public class GildedRose {
             }
 
         }
-
+        // Sellin decrease in all cases
         item  = downSellin(item , 1);
         return item;
     }
