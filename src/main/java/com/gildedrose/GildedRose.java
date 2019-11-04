@@ -73,7 +73,7 @@ public class GildedRose {
 */
         Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
         for (int i = 0; i < items.length; i++) {
-
+            logger.info("loop : " + i);
             switch (items[i].name) {
                 case "Aged Brie":
                     logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
@@ -124,6 +124,8 @@ public class GildedRose {
                     }else{
                         items[i].quality  = 0;
                     }
+
+
                     items[i].sellIn = items[i].sellIn - 1;
                     // code block
                     break;
