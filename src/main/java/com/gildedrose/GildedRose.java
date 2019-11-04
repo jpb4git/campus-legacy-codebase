@@ -14,7 +14,7 @@ public class GildedRose {
 
     public void updateQuality() {
 
-        /*
+
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
         for (int i = 0; i < items.length; i++) {
 
@@ -70,7 +70,7 @@ public class GildedRose {
                 }
             }
         }
-*/
+/*
         Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
         logger.info("nb elements : "  + items.length );
 
@@ -132,7 +132,6 @@ public class GildedRose {
                         items[i].quality  = 0;
                     }
 
-
                     items[i].sellIn = items[i].sellIn - 1;
 
                     logger.info(" after " +  items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
@@ -162,6 +161,8 @@ public class GildedRose {
 
             logger.info("quality now : " + items[i].quality );
         }
+
+         */
     }
 
     public Item[] getItems() {
