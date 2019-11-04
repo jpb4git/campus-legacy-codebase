@@ -17,7 +17,7 @@ public class GildedRose {
 
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
 
-        /*
+
         for (int i = 0; i < items.length; i++) {
 
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
@@ -72,10 +72,10 @@ public class GildedRose {
                 }
             }
         }
-*/
+
 
         logger.info("nb elements : "  + items.length );
-
+/*
         for (int i = 0; i < items.length; i++) {
             logger.info("loop : " + i);
 
@@ -163,7 +163,7 @@ public class GildedRose {
 
             logger.info("quality now : " + items[i].quality );
         }
-
+*/
 
     }
 
