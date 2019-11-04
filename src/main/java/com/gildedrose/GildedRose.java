@@ -76,18 +76,22 @@ public class GildedRose {
 
             switch (items[i].name) {
                 case "Aged Brie":
+                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     items[i].sellIn = items[i].sellIn - 1;
                     if (items[i].quality < 50) {
+                        logger.info("aged < 50 passed");
                         items[i].quality = items[i].quality + 1;
                         if (items[i].sellIn < 0){
+                            logger.info("aged  selling < 0 passed");
                             if (items[i].quality < 50) {
+                                logger.info("aged < 50 passed");
                                 items[i].quality = items[i].quality + 1;
                             }
                         }
                     }
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
-
+                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     if (items[i].sellIn > 10) {
                         if (items[i].quality < 50) {
                             items[i].quality = items[i].quality + 1;
@@ -110,9 +114,11 @@ public class GildedRose {
                     break;
 
                 case "Sulfuras, Hand of Ragnaros":
+                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     // code block
                     break;
                 case "Conjured Mana Cake":
+                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     if (items[i].quality - 2 >= 0){
                         items[i].quality  = items[i].quality - 2;
                     }else{
@@ -122,7 +128,7 @@ public class GildedRose {
                     // code block
                     break;
                 default:
-
+                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     // passed
                     if (items[i].sellIn <= 0){
                         logger.info(" foo default ");
