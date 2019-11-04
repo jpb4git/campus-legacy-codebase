@@ -190,7 +190,7 @@ public class GildedRose {
             item.quality = qualityBounded(item.quality,1);
         }else if (item.name.contains("Backstage passes") ){
             // date dépassée
-            if (item.sellIn <= 0){
+            if (item.sellIn < 0){
                 item.quality = qualityBounded(item.quality,-50);
             }else if (item.sellIn >= 0 && item.sellIn < 6   ){
                 item.quality = qualityBounded(item.quality,3);

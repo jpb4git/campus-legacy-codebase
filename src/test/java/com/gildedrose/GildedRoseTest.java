@@ -122,8 +122,8 @@ public class GildedRoseTest {
     }
 
     @Test
-    void backstage_Drop_Quality_To_zero_if_Sellin_equal_Or_Less_Zero() {
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0,  30) };
+    void backstage_Drop_Quality_To_zero_if_Sellin_Less_Zero() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", -1,  30) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(0);
