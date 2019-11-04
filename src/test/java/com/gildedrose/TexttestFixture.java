@@ -16,9 +16,9 @@ public class TexttestFixture {
                 // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6) };
 
-        GildedRoseRefactor app = new GildedRoseRefactor(items);
+        GildedRose app = new GildedRose(items);
         //GildedRose app = new GildedRose(items);
-        int days = 5;
+        int days = 25;
         if (args.length > 0) {
             days = Integer.parseInt(args[0]) + 1;
         }
