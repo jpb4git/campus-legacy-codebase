@@ -14,6 +14,7 @@ public class GildedRose {
 
     public void updateQuality() {
 
+        /*
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
         for (int i = 0; i < items.length; i++) {
 
@@ -69,8 +70,8 @@ public class GildedRose {
                 }
             }
         }
-
-      /*  Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
+*/
+        Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
         for (int i = 0; i < items.length; i++) {
 
             switch (items[i].name) {
@@ -84,7 +85,6 @@ public class GildedRose {
                             }
                         }
                     }
-
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
 
@@ -125,6 +125,7 @@ public class GildedRose {
 
                     // passed
                     if (items[i].sellIn <= 0){
+                        logger.info(" foo default ");
                         if (items[i].quality - 2 >= 0 ){
                             items[i].quality = items[i].quality - 2;
 
@@ -141,17 +142,8 @@ public class GildedRose {
                         items[i].quality = items[i].quality -1;
                         items[i].sellIn  = items[i].sellIn - 1;
                     }
-
-
             }
         }
-*/
-    }
-
-    private void internalUpdate(){
-
-
-
     }
 
     public Item[] getItems() {
