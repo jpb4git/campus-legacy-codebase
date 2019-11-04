@@ -174,37 +174,52 @@ public class GildedRose {
         }
 */
 
-
+    Logger logger = LoggerFactory.getLogger(GildedRose.class);
     public void updateQuality() {
 
         for (int i = 0; i < items.length; i++) {
+            logger.info("length : " + items.length );
+
             items[i] = SelectItemByName(items[i]);
         }
     }
     private Item SelectItemByName(Item item){
         if (item.name.contains("Conjured") ){
+            logger.info("conjured before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             item.quality = qualityBounded(item.quality,-2);
+            logger.info("conjured after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
         }else if (item.name.contains("Sulfuras") ){
             //nothing to do
         }else if (item.name.contains("Aged Brie") ){
+            logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             item.quality = qualityBounded(item.quality,1);
+            logger.info("brie after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
         }else if (item.name.contains("Backstage passes") ){
             // date dépassée
+            logger.info("BackStage before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             if (item.sellIn < 0){
                 item.quality = qualityBounded(item.quality,-50);
+                logger.info("< 0 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }else if (item.sellIn >= 0 && item.sellIn < 6   ){
                 item.quality = qualityBounded(item.quality,3);
+                logger.info("< 6 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }else if (item.sellIn > 5 && item.sellIn < 11){
                 item.quality = qualityBounded(item.quality,2);
+                logger.info(" < 11 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }else{
                 item.quality = qualityBounded(item.quality,1);
+                logger.info("other case After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }
             // other  unNamedItems
         }else{
             if (item.sellIn < 0){
+                logger.info(" < 0 foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
                 item.quality = qualityBounded(item.quality,-2);
+                logger.info("< 0  foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }else{
+                logger.info("foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
                 item.quality = qualityBounded(item.quality,-1);
+                logger.info("foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }
 
         }
