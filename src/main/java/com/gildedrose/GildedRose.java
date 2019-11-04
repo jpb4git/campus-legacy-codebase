@@ -13,7 +13,7 @@ public class GildedRose {
 
 
     public void updateQuality() {
-        /*
+
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
         for (int i = 0; i < items.length; i++) {
 
@@ -69,8 +69,8 @@ public class GildedRose {
                 }
             }
         }
-        */
-        Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
+
+      /*  Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
         for (int i = 0; i < items.length; i++) {
 
             switch (items[i].name) {
@@ -145,7 +145,7 @@ public class GildedRose {
 
             }
         }
-
+*/
     }
 
     private void internalUpdate(){
