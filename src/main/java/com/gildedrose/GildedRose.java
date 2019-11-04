@@ -190,7 +190,7 @@ public class GildedRose {
             logger.info("conjured after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
         }else if (item.name.contains("Sulfuras") ){
             //nothing to do
-        }else if (item.name.contains("Aged Brie") ){
+        }else if (item.name.equals("Aged Brie") ){
             logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             item.quality = qualityBounded(item.quality,1);
             logger.info("brie after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
