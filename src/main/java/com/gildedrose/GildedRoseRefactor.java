@@ -10,8 +10,6 @@ public class GildedRoseRefactor {
     }
 
 
-
-
     public void updateQuality() {
         Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
 
@@ -31,8 +29,6 @@ public class GildedRoseRefactor {
 
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
-
-
 
                     if (items[i].sellIn > 10) {
                         if (items[i].quality < 50) {
