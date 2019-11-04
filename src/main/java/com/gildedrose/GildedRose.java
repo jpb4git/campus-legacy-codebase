@@ -72,15 +72,21 @@ public class GildedRose {
         }
 */
         Logger logger = LoggerFactory.getLogger(GildedRoseRefactor.class);
+        logger.info("nb elements : "  + items.length );
+
         for (int i = 0; i < items.length; i++) {
             logger.info("loop : " + i);
+
             switch (items[i].name) {
                 case "Aged Brie":
                     logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     items[i].sellIn = items[i].sellIn - 1;
                     if (items[i].quality < 50) {
                         logger.info("aged < 50 passed");
+                        logger.info("quality was : " + items[i].quality );
                         items[i].quality = items[i].quality + 1;
+                        logger.info("quality now : " + items[i].quality );
+
                         if (items[i].sellIn < 0){
                             logger.info("aged  selling < 0 passed");
                             if (items[i].quality < 50) {
@@ -151,6 +157,8 @@ public class GildedRose {
                         items[i].sellIn  = items[i].sellIn - 1;
                     }
             }
+
+            logger.info("quality now : " + items[i].quality );
         }
     }
 
