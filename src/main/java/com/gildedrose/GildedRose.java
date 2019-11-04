@@ -124,7 +124,8 @@ public class GildedRose {
                     // code block
                     break;
                 case "Conjured Mana Cake":
-                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
+                    logger.info("conjured data ");
+                    logger.info("before " +  items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     if (items[i].quality - 2 >= 0){
                         items[i].quality  = items[i].quality - 2;
                     }else{
@@ -133,6 +134,8 @@ public class GildedRose {
 
 
                     items[i].sellIn = items[i].sellIn - 1;
+
+                    logger.info(" after " +  items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
                     // code block
                     break;
                 default:
@@ -147,7 +150,6 @@ public class GildedRose {
                         }else{
 
                         }
-
 
                     }else{
                         logger.info("foo_decrease_Sellin_All_Day");
