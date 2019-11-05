@@ -32,7 +32,7 @@ public class GildedRose {
                     }
 
                     if (items[i].name.startsWith("Red red wine")){
-                        logger.info(items[i].quality +  "  -> Red wine  detected  with quality ->" + items[i].quality);
+                        logger.info(items[i].sellIn +  "  -> Red wine  detected  with quality ->" + items[i].quality);
                         // phase de
                         if (items[i].sellIn > 300){
                             logger.info("sellin > 300 ");
