@@ -16,9 +16,9 @@ public class GildedRose {
         for (int i = 0; i < items.length; i++) {
           //  logger.debug("The Current item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
 
-            if (items[i].name.contains("Sulfuras")) {
+            if (!items[i].name.contains("Sulfuras")) {
                // logger.info("Item is legendary. Quality is " + items[i].quality);
-            } else {
+
 
                 if (!items[i].name.contains("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                   //  logger.info("Item is not a Brie or Passes");
@@ -37,12 +37,14 @@ public class GildedRose {
 
                         if (items[i].sellIn >=  300 && items[i].sellIn < 600 ) {
                             logger.info("sellin > 300 ");
-                            qualityUpdate(i, items[i].quality, -1);
+                            items[i].quality++;
+                            //qualityUpdate(i, items[i].quality, -1);
                         }
 
                         if (items[i].sellIn < 0 ){
                             logger.info("sellin < 0 ");
-                            qualityUpdate(i, items[i].quality, 1);
+                            items[i].quality--;
+                            //qualityUpdate(i, items[i].quality, 1);
                         }
                     }
 
