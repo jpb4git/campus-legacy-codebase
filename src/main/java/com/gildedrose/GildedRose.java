@@ -20,8 +20,7 @@ public class GildedRose {
                 logger.info("Item is legendary. Quality is " + items[i].quality);
             } else {
 
-                if (!items[i].name.contains("Aged Brie")
-                        && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!items[i].name.contains("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     logger.info("Item is not a Brie or Passes");
 
                     qualityUpdate(i, items[i].quality, 1);
@@ -30,6 +29,16 @@ public class GildedRose {
                     if (items[i].name.startsWith("Conjured")) {
                         qualityUpdate(i, items[i].quality, 1);
                         logger.info("Decreasing quality by an extra one because conjured. Quality update " + items[i].quality);
+                    }
+
+                    if (items[i].name.startsWith("Red red wine")){
+                        // phase de
+                        if (items[i].sellIn > 300){
+                            qualityUpdate(i, items[i].quality, 1);
+                        }
+                        if (items[i].sellIn < 0 ){
+                            qualityUpdate(i, items[i].quality, -1);
+                        }
                     }
 
                 } else {
@@ -62,6 +71,7 @@ public class GildedRose {
                 if (items[i].sellIn < 0) {
                     if (!items[i].name.contains("Aged Brie")) {
                         if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+
                             qualityUpdate(i, items[i].quality, 1);
                             logger.info("Decreasing item quality by one. Quality update " + items[i].quality);
 
@@ -69,7 +79,8 @@ public class GildedRose {
                                 qualityUpdate(i, items[i].quality, 1);
                                 logger.info("Decreasing item quality by an extra one because conjured. Quality update " + items[i].quality);
                             }
-                        } else {
+                        }
+                        else {
                             items[i].quality = 0;
                             logger.info("Backstage passes quality is equal to zero because outdated. Quality update " + items[i].quality);
                         }
