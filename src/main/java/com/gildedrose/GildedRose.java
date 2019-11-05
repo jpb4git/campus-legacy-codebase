@@ -123,7 +123,7 @@ public class GildedRose {
         }else if (item.name.startsWith("Sulfuras") ){
             //nothing to do
             logger.info("i'm Sulfuras  ... doing nothing");
-        }else if (item.name.equals("Aged Brie") ){
+        }else if (item.name.contains("Brie") ){
 
             logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             item.quality = qualityBounded(item.quality,1);
