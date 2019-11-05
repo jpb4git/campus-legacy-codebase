@@ -14,7 +14,7 @@ public class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            logger.debug("Current item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
+            logger.debug("The Current item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
 
             if (items[i].quality > 50) {
                 logger.info("Item is legendary. Quality is " + items[i].quality);
@@ -32,11 +32,14 @@ public class GildedRose {
                     }
 
                     if (items[i].name.startsWith("Red red wine")){
+                        logger.info(items[i].quality +  "  -> Red wine  detected  with quality ->" + items[i].quality);
                         // phase de
                         if (items[i].sellIn > 300){
+                            logger.info("sellin > 300 ");
                             qualityUpdate(i, items[i].quality, 1);
                         }
                         if (items[i].sellIn < 0 ){
+                            logger.info("sellin < 0 ");
                             qualityUpdate(i, items[i].quality, -1);
                         }
                     }
