@@ -118,6 +118,7 @@ public class GildedRose {
 
         }else if (item.name.contains("Sulfuras") ){
             //nothing to do
+            logger.info("i'm Sulfuras  ... doing nothing");
         }else if (item.name.equals("Aged Brie") ){
 
             logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
