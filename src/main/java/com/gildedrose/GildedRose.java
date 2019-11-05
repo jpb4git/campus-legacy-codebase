@@ -10,8 +10,6 @@ public class GildedRose {
     }
 
 
-
-
 /*
         for (int i = 0; i < items.length; i++) {
             logger.info("loop : " + i);
@@ -110,13 +108,18 @@ public class GildedRose {
         }
     }
     private Item SelectItemByName(Item item){
-        logger.info("SelectedItem : " +  item.name);
+        logger.info("SelectedItem :" +  item.name);
+
+
         if (item.name.startsWith("Conjured")){
             logger.info("conjured before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
             item.quality = qualityBounded(item.quality,-2);
+
             logger.info("conjured after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
 
-        }else if (item.name.contains("Sulfuras") ){
+
+        }else if (item.name.startsWith("Sulfuras") ){
             //nothing to do
             logger.info("i'm Sulfuras  ... doing nothing");
         }else if (item.name.equals("Aged Brie") ){
@@ -146,18 +149,19 @@ public class GildedRose {
             // other  unNamedItems
         }else{
             if (item.sellIn < 0){
-                logger.info(" < 0 foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                logger.info(" < 0 foo before : Ql  : " + item.quality  );
                 item.quality = qualityBounded(item.quality,-2);
-                logger.info("< 0  foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                logger.info("< 0  foo after : Ql  : " + item.quality  );
             }else{
-                logger.info("foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                logger.info("foo before : Ql  : " + item.quality  );
                 item.quality = qualityBounded(item.quality,-1);
-                logger.info("foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                logger.info("foo after : Ql  : " + item.quality  );
             }
 
         }
         // Sellin decrease in all cases
         item  = downSellin(item , 1);
+        logger.info("new  sellIn :  " + item.sellIn);
         return item;
     }
     /**
@@ -171,12 +175,14 @@ public class GildedRose {
         int minQuality = 0;
         int tempQuality = currentQuality + QualityMouvment;
 
-        if (tempQuality <= maxQuality && tempQuality >= minQuality){
-            return tempQuality;
-        }
+        if (tempQuality > maxQuality) { tempQuality = maxQuality; }
+        if (tempQuality < minQuality) { tempQuality = minQuality; }
 
-        return (Integer.signum(tempQuality) <= 0 ?  minQuality : maxQuality );
+        return tempQuality;
     }
+
+
+
     private Item downSellin(Item item ,int num){
         item.sellIn = item.sellIn - num;
         return item;

@@ -173,11 +173,19 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isEqualTo(28);
     }
 
+    @Test
+    void Like_Conjured_Decrease_Quality_by_ONe() {
+        Item[] items = new Item[] { new Item("Like Conjured infact", 5,  30) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(29);
+    }
 
     @Test
     void qualityBounded_0_to_50() {
         Item[] items = new Item[] { new Item("Conjured infact", 10,  30) };
         GildedRose app = new GildedRose(items);
+
         assertThat(app.qualityBounded(30,-2)).isEqualTo(28);
         assertThat(app.qualityBounded(33,-2)).isEqualTo(31);
     }
