@@ -109,7 +109,7 @@ public class GildedRose {
     }
     private Item SelectItemByName(Item item){
         logger.info("SelectedItem :" +  item.name);
-
+        logger.debug(item.name);
 
         if (item.name.startsWith("Conjured")){
             logger.info("conjured before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
