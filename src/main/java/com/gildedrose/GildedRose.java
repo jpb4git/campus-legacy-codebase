@@ -34,7 +34,8 @@ public class GildedRose {
                     if (items[i].name.startsWith("Red red wine")){
                         logger.info(items[i].sellIn +  "  -> !! Red wine  detected  with quality ->" + items[i].quality);
                         // phase de
-                        if (items[i].sellIn > 300){
+
+                        if (items[i].sellIn >=  300 && items[i].sellIn < 600 ) {
                             logger.info("sellin > 300 ");
                             qualityUpdate(i, items[i].quality, -1);
                         }
