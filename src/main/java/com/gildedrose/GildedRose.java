@@ -1,202 +1,100 @@
 package com.gildedrose;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GildedRose {
     Item[] items;
 
+    public static final Logger logger = LoggerFactory.getLogger(GildedRose.class);
+
     public GildedRose(Item[] items) {
         this.items = items;
     }
 
-
-/*
-        for (int i = 0; i < items.length; i++) {
-            logger.info("loop : " + i);
-
-            switch (items[i].name) {
-                case "Aged Brie":
-                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    items[i].sellIn = items[i].sellIn - 1;
-                    if (items[i].quality < 50) {
-                        logger.info("aged < 50 passed");
-                        logger.info("quality was : " + items[i].quality );
-                        items[i].quality = items[i].quality + 1;
-                        logger.info("quality now : " + items[i].quality );
-
-                        if (items[i].sellIn < 0){
-                            logger.info("aged  selling < 0 passed");
-                            if (items[i].quality < 50) {
-                                logger.info("aged < 50 passed");
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                    break;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    if (items[i].sellIn > 10) {
-                        if (items[i].quality < 50) {
-                            items[i].quality = items[i].quality + 1;
-                        }
-
-                    }else if (items[i].sellIn < 6) {
-                        items[i].quality = items[i].quality + 3;
-                    }else if (items[i].sellIn < 11) {
-                        items[i].quality = items[i].quality + 2;
-                    }
-
-
-                    items[i].quality = items[i].quality > 50 ? 50 : items[i].quality;
-
-
-                    if (items[i].sellIn <= 0) {
-                        items[i].quality = 0;
-                    }
-                    items[i].sellIn = items[i].sellIn - 1;
-                    break;
-
-                case "Sulfuras, Hand of Ragnaros":
-                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    // code block
-                    break;
-                case "Conjured Mana Cake":
-                    logger.info("conjured data ");
-                    logger.info("before " +  items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    if (items[i].quality - 2 >= 0){
-                        items[i].quality  = items[i].quality - 2;
-                    }else{
-                        items[i].quality  = 0;
-                    }
-
-                    items[i].sellIn = items[i].sellIn - 1;
-
-                    logger.info(" after " +  items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    // code block
-                    break;
-                default:
-                    logger.info(items[i].name + " | " + items[i].quality + " | " + items[i].sellIn );
-                    // passed
-                    if (items[i].sellIn <= 0){
-                        logger.info(" foo default ");
-                        if (items[i].quality - 2 >= 0 ){
-                            items[i].quality = items[i].quality - 2;
-
-                            logger.info("foo_date_Has_Passed_And_Quality_Never_Negativ  :");
-                        }else{
-
-                        }
-
-                    }else{
-                        logger.info("foo_decrease_Sellin_All_Day");
-                        logger.info("foo_decrease_Quality_All_Day");
-
-                        items[i].quality = items[i].quality -1;
-                        items[i].sellIn  = items[i].sellIn - 1;
-                    }
-            }
-
-            logger.info("quality now : " + items[i].quality );
-        }
-*/
-
-    Logger logger = LoggerFactory.getLogger(GildedRose.class);
     public void updateQuality() {
-        logger.info("length : " + items.length );
         for (int i = 0; i < items.length; i++) {
-            items[i] = SelectItemByName(items[i]);
-        }
-    }
-    private Item SelectItemByName(Item item){
+            logger.debug("Current item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
 
-        logger.info("before : " +  item.name +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+            if (items[i].quality > 50) {
+                logger.info("Item is legendary. Quality is " + items[i].quality);
+            } else {
+
+                if (!items[i].name.contains("Aged Brie")
+                        && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    logger.info("Item is not a Brie or Passes");
+
+                    qualityUpdate(i, items[i].quality, 1);
+                    logger.info("Decreasing item quality by one. Quality update " + items[i].quality);
+
+                    if (items[i].name.startsWith("Conjured")) {
+                        qualityUpdate(i, items[i].quality, 1);
+                        logger.info("Decreasing quality by an extra one because conjured. Quality update " + items[i].quality);
+                    }
+
+                } else {
+                    logger.info("Item is a Brie or Passes");
+
+                    qualityUpdate(i, items[i].quality, -1);
+                    logger.info("Increase quality by one. Quality update " + items[i].quality);
+
+                    if (items[i].name.startsWith("Conjured")) {
+                        qualityUpdate(i, items[i].quality, -1);
+                        logger.info("Increase quality by an extra one because conjured. Quality update " + items[i].quality);
+                    }
+
+                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].sellIn < 11) {
+                            qualityUpdate(i, items[i].quality, -1);
+                            logger.info("Increase backstage passes quality by an extra one because less than 11 days sellIn. Quality update " + items[i].quality);
+                        }
+                        if (items[i].sellIn < 6) {
+                            qualityUpdate(i, items[i].quality, -1);
+                            logger.info("Increase backstage passes quality by an another extra one because less than 6 days sellIn. Quality update " + items[i].quality);
+                        }
+                    }
+                }
 
 
-        if (item.name.startsWith("Conjured")){
-            logger.info("conjured before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                logger.info("Decreasing item sellIn by one");
+                items[i].sellIn--;
 
-            item.quality = qualityBounded(item.quality,-2);
+                if (items[i].sellIn < 0) {
+                    if (!items[i].name.contains("Aged Brie")) {
+                        if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                            qualityUpdate(i, items[i].quality, 1);
+                            logger.info("Decreasing item quality by one. Quality update " + items[i].quality);
 
-            logger.info("conjured after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                            if (items[i].name.startsWith("Conjured")) {
+                                qualityUpdate(i, items[i].quality, 1);
+                                logger.info("Decreasing item quality by an extra one because conjured. Quality update " + items[i].quality);
+                            }
+                        } else {
+                            items[i].quality = 0;
+                            logger.info("Backstage passes quality is equal to zero because outdated. Quality update " + items[i].quality);
+                        }
+                    } else {
+                        qualityUpdate(i, items[i].quality, -1);
+                        logger.info("Increase quality by another extra one because sellIn negative. Quality update " + items[i].quality);
 
-
-        }else if (item.name.startsWith("Sulfuras") ){
-            //nothing to do
-            logger.info("i'm Sulfuras  ... doing nothing");
-        }else if (item.name.contains("Brie") ){
-
-            logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            item.quality = qualityBounded(item.quality,1);
-            logger.info("brie after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-
-        }else if (item.name.contains("Backstage passes") ){
-
-            // date dépassée
-            logger.info("BackStage before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-
-            if (item.sellIn < 0){
-                item.quality = qualityBounded(item.quality,-50);
-                logger.info("< 0 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else if (item.sellIn >= 0 && item.sellIn < 6   ){
-                item.quality = qualityBounded(item.quality,3);
-                logger.info("< 6 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else if (item.sellIn > 5 && item.sellIn < 11){
-                item.quality = qualityBounded(item.quality,2);
-                logger.info(" < 11 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else{
-                item.quality = qualityBounded(item.quality,1);
-                logger.info("other case After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+                        if (items[i].name.startsWith("Conjured")) {
+                            qualityUpdate(i, items[i].quality, -1);
+                            logger.info("Increase quality by another extra one because sellIn negative and conjured. Quality update " + items[i].quality);
+                        }
+                    }
+                }
             }
-            // other  unNamedItems
-        }else{
-            if (item.sellIn < 0){
-                logger.info(" < 0 foo before : Ql  : " + item.quality  );
-                item.quality = qualityBounded(item.quality,-2);
-                logger.info("< 0  foo after : Ql  : " + item.quality  );
-            }else{
-                logger.info("foo before : Ql  : " + item.quality  );
-                item.quality = qualityBounded(item.quality,-1);
-                logger.info("foo after : Ql  : " + item.quality  );
-            }
-
+            logger.debug("Updated item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
         }
-        // Sellin decrease in all cases
-        if (!item.name.startsWith("Sulfuras")){
-            item  = downSellin(item , 1);
+    }
+
+
+    public void qualityUpdate(int i, int quality, int update) {
+
+        if (quality > 0 && quality < 50) {
+            this.items[i].quality = quality - update;
         }
-
-
-        logger.info("after  : " +  item.name +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-        return item;
     }
-    /**
-     *
-     * @param currentQuality
-     * @param QualityMouvment
-     * @return
-     */
-    public int qualityBounded(int currentQuality,int QualityMouvment ){
-        int maxQuality = 50;
-        int minQuality = 0;
-        int tempQuality = currentQuality + QualityMouvment;
-
-        if (tempQuality > maxQuality) { tempQuality = maxQuality; }
-        if (tempQuality < minQuality) { tempQuality = minQuality; }
-
-        return tempQuality;
-    }
-
-
-
-    private Item downSellin(Item item ,int num){
-        item.sellIn = item.sellIn - num;
-        return item;
-    }
-
-
-
-
-
 
     public Item[] getItems() {
         return items;
