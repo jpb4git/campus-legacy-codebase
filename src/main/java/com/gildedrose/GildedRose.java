@@ -109,7 +109,7 @@ public class GildedRose {
     }
     private Item SelectItemByName(Item item){
 
-        logger.info("before : " +  item.quality +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+        logger.info("before : " +  item.name +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
 
 
         if (item.name.startsWith("Conjured")){
@@ -161,8 +161,12 @@ public class GildedRose {
 
         }
         // Sellin decrease in all cases
-        item  = downSellin(item , 1);
-        logger.info("after  : " +  item.quality +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+        if (!item.name.startsWith("Sulfuras")){
+            item  = downSellin(item , 1);
+        }
+
+
+        logger.info("after  : " +  item.name +  " Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
         return item;
     }
     /**
