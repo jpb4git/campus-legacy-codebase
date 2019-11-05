@@ -90,7 +90,7 @@ public class GildedRoseRefactor {
 
 
     }*/
-
+/*
     public void updateQuality() {
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
         for (int i = 0; i < items.length; i++) {
@@ -98,9 +98,14 @@ public class GildedRoseRefactor {
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
 
-                        logger.info("Test  : Hello World");
+                        items[i].quality = items[i].quality - 1;
+                        logger.info("remove 1 quality because lambda");
+                    }
+                    if (items[i].name.contains("Conjured")) {
+                        logger.info("remove 1 extra quality because conjured");
+                        items[i].quality = items[i].quality - 1;
+                        logger.info("");
                     }
                 }
                 // soit brie or Backstage
@@ -147,44 +152,61 @@ public class GildedRoseRefactor {
             }
         }
     }
-   /*
+   */
+
+
    public void updateQuality() {
 
         for (int i = 0; i < items.length; i++) {
             items[i] = SelectItemByName(items[i]);
         }
     }
-   */
+
 
    private Item SelectItemByName(Item item){
+
+
+
+       Logger logger = LoggerFactory.getLogger(GildedRose.class);
+       logger.info( "item tested : " +  item.name + " sell : " + item.sellIn + " Ql :" + item.quality );
        if (item.name.contains("Conjured") ){
 
-           int  boundedQuality =  qualityBounded(item.quality,-2);
-           item.quality = boundedQuality ;
+           int  boundedQuality =
+
+           item.quality = qualityBounded(item.quality,-2);
+           logger.info("remove 2 quality because Conjured --- item" );
 
        }else if (item.name.contains("Sulfuras") ){
         //nothing to do
+           logger.info("remove 0 quality because sulfuras");
 
        }else if (item.name.contains("Aged Brie") ){
            item.quality = qualityBounded(item.quality,1);
+           logger.info("aged brie  : Ql : " + item.quality + "  Sell : " + item.sellIn );
 
        }else if (item.name.contains("Backstage passes") ){
            // date dépassée
            if (item.sellIn <= 0){
                item.quality = qualityBounded(item.quality,-50);
+               logger.info("backstage date depassée  : Ql : " + item.quality + "  Sell : " + item.sellIn );
            }else if (item.sellIn >= 0 && item.sellIn < 6   ){
                item.quality = qualityBounded(item.quality,3);
+               logger.info("backstage date < 6  : Ql : " + item.quality + "  Sell : " + item.sellIn );
            }else if (item.sellIn > 5 && item.sellIn < 11){
                item.quality = qualityBounded(item.quality,2);
+               logger.info("backstage date < 11  : Ql : " + item.quality + "  Sell : " + item.sellIn );
            }else{
                item.quality = qualityBounded(item.quality,1);
+               logger.info("backstage else  : Ql : " + item.quality + "  Sell : " + item.sellIn );
            }
         // other  unNamedItems
        }else{
            if (item.sellIn < 0){
                item.quality = qualityBounded(item.quality,-2);
+               logger.info("foo date depassée  :"+ item.name +" Ql : " + item.quality + "  Sell : " + item.sellIn );
            }else{
                item.quality = qualityBounded(item.quality,-1);
+               logger.info("foo date ok  :"+ item.name +" Ql : " + item.quality + "  Sell : " + item.sellIn );
            }
 
        }
