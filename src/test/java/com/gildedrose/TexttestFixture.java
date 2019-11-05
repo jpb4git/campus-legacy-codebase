@@ -5,6 +5,7 @@ public class TexttestFixture {
         System.out.println("OMGHAI!");
 
         Item[] items = new Item[] {
+                /*
                 new Item("+5 Dexterity Vest", 10, 20), //
                 new Item("Aged Brie", 2, 0), //
                 new Item("Elixir of the Mongoose", 5, 7), //
@@ -17,12 +18,14 @@ public class TexttestFixture {
                 // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6),
                 new Item("Conjured olga Cake", 10, 8),
+                */
+                new Item("Red red wine", 200, 300),
         };
 
 
         GildedRose app = new GildedRose(items);
         //GildedRose app = new GildedRose(items);
-        int days = 25;
+        int days = 400;
         if (args.length > 0) {
             days = Integer.parseInt(args[0]) + 1;
         }

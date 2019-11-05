@@ -16,7 +16,7 @@ public class GildedRose {
         for (int i = 0; i < items.length; i++) {
             logger.debug("The Current item: " + items[i].name + ", " + items[i].sellIn + ", " + items[i].quality);
 
-            if (items[i].quality > 50) {
+            if (items[i].name.contains("Sulfuras")) {
                 logger.info("Item is legendary. Quality is " + items[i].quality);
             } else {
 
@@ -36,11 +36,12 @@ public class GildedRose {
                         // phase de
                         if (items[i].sellIn > 300){
                             logger.info("sellin > 300 ");
-                            qualityUpdate(i, items[i].quality, 1);
+                            qualityUpdate(i, items[i].quality, -1);
                         }
+
                         if (items[i].sellIn < 0 ){
                             logger.info("sellin < 0 ");
-                            qualityUpdate(i, items[i].quality, -1);
+                            qualityUpdate(i, items[i].quality, 1);
                         }
                     }
 
@@ -106,9 +107,14 @@ public class GildedRose {
 
     public void qualityUpdate(int i, int quality, int update) {
 
-        if (quality > 0 && quality < 50) {
+        if ( this.items[i].name.contains("Red red wine")){
             this.items[i].quality = quality - update;
+        }else{
+            if (quality > 0 && quality < 50) {
+                this.items[i].quality = quality - update;
+            }
         }
+
     }
 
     public Item[] getItems() {
