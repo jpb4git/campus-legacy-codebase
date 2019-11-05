@@ -169,9 +169,7 @@ public class GildedRoseRefactor {
 
        Logger logger = LoggerFactory.getLogger(GildedRose.class);
        logger.info( "item tested : " +  item.name + " sell : " + item.sellIn + " Ql :" + item.quality );
-       if (item.name.contains("Conjured") ){
-
-           int  boundedQuality =
+       if (item.name.contains("Conjured") && !item.name.contains("Like Conjured")  ){
 
            item.quality = qualityBounded(item.quality,-2);
            logger.info("remove 2 quality because Conjured --- item" );
