@@ -208,8 +208,10 @@ public class GildedRoseRefactor {
            }
 
        }
+        if (!item.name.contains("Sulfuras")){
+            item  = downSellin(item , 1);
+        }
 
-       item  = downSellin(item , 1);
        return item;
    }
     /**
