@@ -8,5 +8,6 @@ public class ItemSulfuras extends Item {
     @Override
     protected void update(){
         //nothing
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
     }
 }

@@ -11,14 +11,7 @@ public class ItemBrie extends Item {
 
         this.setSellIn(this.getSellIn() -1) ;
 
-         /*
-                if (item.sellIn < 0) {
-                    //#3
-                    update(item, 2);
-                } else {
-                    update(item, 1);
-                }
-                */
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
 
         if(this.getSellIn() < 0){
             doUpdate(this.getQuality(), 2);

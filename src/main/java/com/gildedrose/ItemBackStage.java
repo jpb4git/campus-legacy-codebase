@@ -9,6 +9,7 @@ public class ItemBackStage extends Item {
     protected void update(){
         this.setSellIn(this.getSellIn() - 1 );
 
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
         if (this.getSellIn() > 10) {
             doUpdate(this.getQuality(), 1);
         } else if (this.getSellIn() > 5) {

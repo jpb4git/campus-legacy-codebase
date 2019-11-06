@@ -8,6 +8,9 @@ public class ItemConjured extends Item{
     @Override
     protected void update(){
         this.setSellIn(this.getSellIn() -1) ;
+
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
+
         if (this.sellIn < 0) {
             doUpdate(this.getQuality(), -4);
         } else {

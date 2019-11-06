@@ -8,6 +8,9 @@ public class ItemRedWine extends Item {
     @Override
     protected void update(){
         this.setSellIn(this.getSellIn() -1) ;
+
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
+
         if(this.getSellIn() >= 300){
             this.setQuality(this.getQuality() +1 ); // bypass doUpdate with range
         }else if(this.getSellIn() < 0){

@@ -1,6 +1,11 @@
 package com.gildedrose;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Item {
+
+    final Logger logger = LoggerFactory.getLogger(GildedRose.class);
 
     public String name;
 
@@ -64,8 +69,8 @@ public class Item {
             // #4
            quality = Math.max(quality + value, 0);
         }
-            this.setQuality(quality);
-        //logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", item.name, item.sellIn, item.quality);
+        this.setQuality(quality);
+        logger.debug("DoUpdate NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
 
     }
 

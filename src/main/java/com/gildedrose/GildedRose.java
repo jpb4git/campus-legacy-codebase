@@ -23,11 +23,11 @@ public class GildedRose {
      */
     public void updateQuality() {
 
-        ArrayList<Item> arrItems= new ArrayList<Item>();
+
 
         int counter = 0;
         for (Item item : items) {
-            //selectItem(item);
+
             String itemName = item.name;
             if (itemName.startsWith("Conjured ")) {
                 itemName = "Conjured";
@@ -58,7 +58,7 @@ public class GildedRose {
 
                 default :
                     newItem  = new ItemStd(item.name,item.sellIn,item.quality);
-                    arrItems.add(newItem);
+
             }
 
             newItem.update();
