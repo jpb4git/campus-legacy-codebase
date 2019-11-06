@@ -38,7 +38,7 @@ public class GildedRose {
 
 
         logger.info("New Log");
-        logger.debug("OldVal : Sellin  {} , Quality {} , Item {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
+        logger.debug("Item {}, OldVal : Sellin  {} , Quality {} , , SellIn : {}, Quality : {}",itemName, oldQl,oldSellIn, item.sellIn, item.quality);
 
         switch (itemName) {
             //#4
