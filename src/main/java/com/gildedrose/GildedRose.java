@@ -78,7 +78,7 @@ public class GildedRose {
             case "Red red wine":
                 if(item.sellIn >= 300){
                     item.quality++;
-                    update(item, 1);
+
                 }else if(item.sellIn < 0){
                     item.quality--;
                 }
