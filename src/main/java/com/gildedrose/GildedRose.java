@@ -64,6 +64,16 @@ public class GildedRose {
                     update(item, -2);
                 }
                 break;
+
+            //#10
+            case "Red red wine":
+                if(item.sellIn >= 300){
+                    update(item, 1);
+                }else if(item.sellIn < 0){
+                    update(item, -1);
+                }
+                break;
+
             default:
 
                 // #2
@@ -74,8 +84,6 @@ public class GildedRose {
                     update(item, -1);
                 }
                 // #2
-
-
         }
 
     }
@@ -91,7 +99,8 @@ public class GildedRose {
     public void update(Item item, int value) {
 
         // #5
-        if (Math.signum(value) > 0) {
+        if (Math.signum(value) > 0 && item.name != "Red red wine") {
+
             item.quality = Math.min(item.quality + value, 50);
         } else {
             // #4

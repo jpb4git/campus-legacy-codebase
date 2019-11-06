@@ -185,4 +185,32 @@ public class GildedRoseTest {
         assertThat(app.items[0].sellIn).isEqualTo(-1);
         assertThat(app.items[0].quality).isEqualTo(26);
     }
+    ///////////////////////////////////////////////////////////////////////////////////
+    //#10
+    @Test
+    void Red_Wine_increase_Quality_600_to_300 () {
+        int quality = 10;
+        int sellIn = 600;
+
+        Item[] items = new Item[] { new Item("Red red wine", sellIn, quality) };
+
+        GildedRose app = new GildedRose(items);
+        //int age = 0;
+        for(int age = 0; age <= sellIn; age++){
+
+            if(age <=300){
+                assertThat(app.items[0].quality).isEqualTo(quality+age);
+
+            }else if(age <= 600){
+
+                assertThat(app.items[0].quality).isEqualTo(quality+300);
+
+            }else{
+
+                assertThat(app.items[0].quality).isEqualTo(quality + 300 - (age - 600));
+            }
+            app.updateQuality();
+        }
+
+    }
 }
