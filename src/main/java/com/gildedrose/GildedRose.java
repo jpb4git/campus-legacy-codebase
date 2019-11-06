@@ -33,7 +33,7 @@ public class GildedRose {
         if (itemName.startsWith("Conjured ")) {
             itemName = "Conjured";
         }
-        logger.debug("Item is {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
+        logger.debug("Item {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
 
         switch (itemName) {
             //#4
