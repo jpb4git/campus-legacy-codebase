@@ -12,11 +12,11 @@ public class ItemStd extends Item {
     @Override
     protected void update(){
 
-        this.minusSellIn();
+        super.update();
 
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", name, sellIn, quality);
         // #2
-        if (this.getSellIn() < 0) {
+        if (sellIn < 0) {
             //#3
            doUpdate( -2);
         } else {

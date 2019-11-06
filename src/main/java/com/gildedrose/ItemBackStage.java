@@ -7,21 +7,20 @@ public class ItemBackStage extends Item {
 
     @Override
     protected void update(){
+        super.update();
 
-        this.minusSellIn();
-
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
-        if (this.getSellIn() > 10) {
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", name, sellIn, quality);
+        if (sellIn > 10) {
             doUpdate( 1);
-        } else if (this.getSellIn() > 5) {
+        } else if (sellIn > 5) {
             doUpdate( 2);
 
-        } else if (this.getSellIn()> 0) {
+        } else if (sellIn > 0) {
             doUpdate( 3);
 
         } else {
             //#8
-            doUpdate( -this.getQuality());
+            doUpdate( -quality);
         }
 
     }

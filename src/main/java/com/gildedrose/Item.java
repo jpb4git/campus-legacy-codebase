@@ -7,11 +7,11 @@ public class Item {
 
     final Logger logger = LoggerFactory.getLogger(GildedRose.class);
 
-    public String name;
+    protected String name;
 
-    public int sellIn;
+    protected int sellIn;
 
-    public int quality;
+    protected  int quality;
 
     //GETTERS SETTERS
     public int getSellIn() {
@@ -40,7 +40,7 @@ public class Item {
 
    @Override
    public String toString() {
-        return this.name + ", " + this.sellIn + ", " + this.quality;
+        return name + ", " + sellIn + ", " + quality;
     }
 
 
@@ -48,7 +48,7 @@ public class Item {
      *
      */
     protected void update(){
-        logger.debug("father Item logger ... ");
+        minusSellIn();
     }
 
 
@@ -60,7 +60,7 @@ public class Item {
      *
      * @param value can be negative or positive
      */
-    public void doUpdate( int value) {
+    protected void doUpdate( int value) {
         int quality;
         // #5
         if (Math.signum(value) > 0) {
@@ -74,8 +74,8 @@ public class Item {
 
     }
 
-    protected void minusSellIn(){
-        this.sellIn--;
+    private void minusSellIn(){
+        sellIn--;
     }
 
 }

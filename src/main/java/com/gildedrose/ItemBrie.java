@@ -9,11 +9,11 @@ public class ItemBrie extends Item {
     @Override
     protected void update(){
 
-        this.minusSellIn();
+        super.update();
 
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", name, sellIn, quality);
 
-        if(this.getSellIn() < 0){
+        if( sellIn < 0){
             doUpdate( 2);
         }else {
             doUpdate( 1);

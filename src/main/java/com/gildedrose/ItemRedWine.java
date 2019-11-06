@@ -7,15 +7,14 @@ public class ItemRedWine extends Item {
 
     @Override
     protected void update(){
+        super.update();
 
-        this.minusSellIn();
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", name, sellIn, quality);
 
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
-
-        if(this.getSellIn() >= 300){
-            this.setQuality(this.getQuality() +1 ); // bypass doUpdate with range
+        if(sellIn >= 300){
+            quality++; // bypass doUpdate with range
         }else if(this.getSellIn() < 0){
-            this.setQuality(this.getQuality() -1 ); // bypass doUpdate with range
+            quality--; // bypass doUpdate with range
         }
     }
 }

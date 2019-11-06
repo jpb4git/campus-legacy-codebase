@@ -7,12 +7,11 @@ public class ItemConjured extends Item{
 
     @Override
     protected void update(){
+        super.update();
 
-        this.minusSellIn();
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", name, sellIn, quality);
 
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
-
-        if (this.sellIn < 0) {
+        if (sellIn < 0) {
             doUpdate( -4);
         } else {
             doUpdate( -2);
