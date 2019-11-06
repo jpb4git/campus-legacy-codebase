@@ -3,6 +3,11 @@ package com.gildedrose;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+
+
 public class GildedRose {
     Item[] items;
     final Logger logger = LoggerFactory.getLogger(GildedRose.class);
@@ -10,6 +15,7 @@ public class GildedRose {
 
     public GildedRose(Item[] items) {
         this.items = items;
+        // iteration sur les items
     }
 
     /**
@@ -17,118 +23,59 @@ public class GildedRose {
      */
     public void updateQuality() {
 
+        ArrayList<Item> arrItems= new ArrayList<Item>();
 
+        int counter = 0;
         for (Item item : items) {
-            selectItem(item);
+            //selectItem(item);
+            String itemName = item.name;
+            if (itemName.startsWith("Conjured ")) {
+                itemName = "Conjured";
+            }
 
+            Item newItem;
+            switch (itemName){
+
+                case "Sulfuras, Hand of Ragnaros":
+                    newItem  = new ItemSulfuras(item.name,item.sellIn,item.quality);
+                    break;
+
+                case "Aged Brie":
+                    newItem  = new ItemBrie(item.name,item.sellIn,item.quality);
+                    break;
+
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    newItem  = new ItemBackStage(item.name,item.sellIn,item.quality);
+                    break;
+
+                case "Conjured":
+                    newItem  = new ItemConjured(item.name,item.sellIn,item.quality);
+                    break;
+
+                case "Red red wine":
+                    newItem  = new ItemRedWine(item.name,item.sellIn,item.quality);
+                    break;
+
+                default :
+                    newItem  = new ItemStd(item.name,item.sellIn,item.quality);
+                    arrItems.add(newItem);
+            }
+
+            newItem.update();
+            items[counter] =  newItem;
+
+            counter++;
 
         }
     }
 
-    public void selectItem(Item item) {
-
-        // #1
-        item.sellIn--;
-        String itemName = item.name;
-        if (itemName.startsWith("Conjured ")) {
-            itemName = "Conjured";
-        }
-        int oldQl = item.quality;
-        int oldSellIn =item.sellIn;
-
-
-        logger.info("New Log");
-
-
-        switch (itemName) {
-            //#4
-            case "Aged Brie":
-
-                if (item.sellIn < 0) {
-                    //#3
-                    update(item, 2);
-                } else {
-                    update(item, 1);
-                }
-                break;
-            //#6
-            case "Sulfuras, Hand of Ragnaros":
-                item.sellIn++;
-                break;
-            //#7
-            case "Backstage passes to a TAFKAL80ETC concert":
-                if (item.sellIn > 10) {
-                    update(item, 1);
-                } else if (item.sellIn > 5) {
-                    update(item, 2);
-                } else if (item.sellIn > 0) {
-                    update(item, 3);
-                } else {
-                    //#8
-                    update(item, -item.quality);
-                }
-                break;
-            //#9
-            case "Conjured":
-                if (item.sellIn < 0) {
-                    //#3
-                    update(item, -4);
-                } else {
-                    update(item, -2);
-                }
-                break;
-
-            //#10
-            case "Red red wine":
-                if(item.sellIn >= 300){
-                    item.quality++; // bypass update with range
-
-                }else if(item.sellIn < 0){
-                    item.quality--; // bypass update with range
-                }
-                break;
-
-            default:
-
-                // #2
-                if (item.sellIn < 0) {
-                    //#3
-                    update(item, -2);
-                } else {
-                    update(item, -1);
-                }
-                // #2
-
-
-        }
-        logger.debug("Item {}, oldSelling :  {} , oldQuality : {} , SellIn : {} ,Quality : {}",itemName,oldSellIn,oldQl, item.sellIn, item.quality);
-
-    }
-    //#3
-    /**
-     * return a calculate positive number
-     * this number will never be more than 50
-     *
-     * @param item  current item
-     * @param value can be negative or positive
-     */
-    public void update(Item item, int value) {
-
-        // #5
-        if (Math.signum(value) > 0) {
-            item.quality = Math.min(item.quality + value, 50);
-        } else {
-            // #4
-            item.quality = Math.max(item.quality + value, 0);
-        }
-        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", item.name, item.sellIn, item.quality);
-
-    }
 
 
     public Item[] getItems(){
         return items;
     }
+
+
 
 }
 

@@ -20,9 +20,12 @@ public class GildedRoseTest {
 
     @Test
     void decrease_Sellin_And_Quality_By_One_Each_Day() {
-        Item[] items = new Item[] { new Item("foo", 10, 10) };
+        Item[] items = new Item[] { new Item("foo2", 10, 10) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
+
+
+
         assertThat(app.items[0].sellIn).isEqualTo(9);
         assertThat(app.items[0].quality).isEqualTo(9);
     }
@@ -94,7 +97,7 @@ public class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertThat(app.items[0].sellIn).isEqualTo(-2);
-        assertThat(app.items[0].quality).isEqualTo(11);
+        assertThat(app.items[0].quality).isEqualTo(12);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////
@@ -185,6 +188,8 @@ public class GildedRoseTest {
         assertThat(app.items[0].sellIn).isEqualTo(-1);
         assertThat(app.items[0].quality).isEqualTo(26);
     }
+
+
     ///////////////////////////////////////////////////////////////////////////////////
     //#10
     @Test
@@ -192,20 +197,20 @@ public class GildedRoseTest {
         int quality = 10;
         int sellIn = 600;
 
-        Item[] items = new Item[] { new Item("Red red wine", sellIn, quality) };
+        Item[] items = new Item[]{new Item("Red red wine", sellIn, quality)};
 
         GildedRose app = new GildedRose(items);
         //int age = 0;
-        for(int age = 0; age <= sellIn; age++){
+        for (int age = 0; age <= sellIn; age++) {
 
-            if(age <=300){
-                assertThat(app.items[0].quality).isEqualTo(quality+age);
+            if (age <= 300) {
+                assertThat(app.items[0].quality).isEqualTo(quality + age);
 
-            }else if(age <= 600){
+            } else if (age <= 600) {
 
-                assertThat(app.items[0].quality).isEqualTo(quality+300);
+                assertThat(app.items[0].quality).isEqualTo(quality + 300);
 
-            }else{
+            } else {
 
                 assertThat(app.items[0].quality).isEqualTo(quality + 300 - (age - 600));
             }
