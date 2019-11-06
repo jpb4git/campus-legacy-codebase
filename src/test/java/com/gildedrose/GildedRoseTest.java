@@ -166,7 +166,7 @@ public class GildedRoseTest {
     }
 
     @Test
-    void Conjured_Decrease_Quality_to_zero() {
+    void Conjured_Decrease_Quality_by_two() {
         Item[] items = new Item[] { new Item("Conjured infact", 0,  30) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();

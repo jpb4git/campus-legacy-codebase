@@ -9,9 +9,75 @@ public class GildedRose {
         this.items = items;
     }
 
+/*
+    public void updateQuality() {
+        Logger logger = LoggerFactory.getLogger(GildedRose.class);
+        for (int i = 0; i < items.length; i++) {
 
+            if (!items[i].name.equals("Aged Brie")
+                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (items[i].quality > 0) {
+                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                        items[i].quality = items[i].quality - 1;
+                        logger.info("Test  : other");
+                    }
+                    if (items[i].name.contains("Conjured") && !items[i].name.contains("Like Conjured") && items[i].quality > 0) {
+                        items[i].quality = items[i].quality - 1;
+                    }
+                }
+            // soit brie or Backstage soit conjured Items
+            } else {
+                if (items[i].quality < 50) {
+                    items[i].quality = items[i].quality + 1;
 
+                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        logger.info("Test  : backstage");
+                        if (items[i].sellIn < 11) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
+                            }
+                        }
 
+                        if (items[i].sellIn < 6) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
+                            }
+                        }
+                    }
+
+                    if (items[i].name.equals("Conjured Mana Cake")){
+                        items[i].quality = items[i].quality + 2;
+                        if (items[i].quality > 50) {
+                            items[i].quality = 50;
+                        }
+                        items[i].sellIn = items[i].sellIn - 1;
+                    }
+                }
+            }
+            //------------------------
+            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                items[i].sellIn = items[i].sellIn - 1;
+            }
+            //-------------------------
+            if (items[i].sellIn < 0) {
+                if (!items[i].name.equals("Aged Brie")) {
+                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].quality > 0) {
+                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                items[i].quality = items[i].quality - 1;
+                            }
+                        }
+                    } else {
+                        items[i].quality = items[i].quality - items[i].quality;
+                    }
+                } else {
+                    if (items[i].quality < 50) {
+                        items[i].quality = items[i].quality + 1;
+                    }
+                }
+            }
+        }
+*/
 /*
         for (int i = 0; i < items.length; i++) {
             logger.info("loop : " + i);
@@ -102,57 +168,93 @@ public class GildedRose {
         }
 */
 
-    Logger logger = LoggerFactory.getLogger(GildedRose.class);
+
     public void updateQuality() {
-
+        Logger logger = LoggerFactory.getLogger(GildedRose.class);
+        logger.info("Array test sended length : " + items.length );
         for (int i = 0; i < items.length; i++) {
-            logger.info("length : " + items.length );
-
+            logger.info("Item before : " + items[i].name  + " Ql :" + items[i].quality  + " | sellIn :  " + items[i].sellIn);
             items[i] = SelectItemByName(items[i]);
+            logger.info("Item after : "+ items[i].name  +" Ql :" + items[i].quality  + " | sellIn :  " + items[i].sellIn);
         }
     }
     private Item SelectItemByName(Item item){
-        if (item.name.contains("Conjured") && !item.name.contains("Like Conjured") ){
-            logger.info("conjured before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
+        Logger logger = LoggerFactory.getLogger(GildedRose.class);
+
+        // Sellin decrease in all cases
+        item  = downSellin(item , 1);
+
+
+        if (item.name.startsWith("Conjured") ){
+            logger.info("conjured");
             item.quality = qualityBounded(item.quality,-2);
-            logger.info("conjured after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
         }else if (item.name.contains("Sulfuras") ){
-            //nothing to do
-        }else if (item.name.equals("Aged Brie") ){
-            logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            item.quality = qualityBounded(item.quality,1);
+
+            //nothing to do with quality
+
+            // but we have to cancel the day sellIn decrease
+            item.sellIn++;
+        }else if (item.name.contains("Brie") ){
+
+            //logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+            // date perimée brie double sa perte de qualité.
+            /**
+             *
+              (all product )  - At the end of each day our system lowers both values for every item
+
+              - "Aged Brie" actually increases in Quality the older it gets
+
+             */
+            item.quality = qualityBounded(item.quality, 1); // à tester ce matin
             logger.info("brie after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
+
+
         }else if (item.name.contains("Backstage passes") ){
             // date dépassée
-            logger.info("BackStage before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            if (item.sellIn < 0){
+            logger.info("backstage :");
+
+            item.quality = qualityBounded(item.quality,1);
+
+            if (item.sellIn < 0){ // date depassée ql à 0
                 item.quality = qualityBounded(item.quality,-50);
-                logger.info("< 0 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else if (item.sellIn >= 0 && item.sellIn < 6   ){
-                item.quality = qualityBounded(item.quality,3);
-                logger.info("< 6 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else if (item.sellIn > 5 && item.sellIn < 11){
-                item.quality = qualityBounded(item.quality,2);
-                logger.info(" < 11 conjured After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
-            }else{
-                item.quality = qualityBounded(item.quality,1);
-                logger.info("other case After : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
             }
-            // other  unNamedItems
-        }else{
-            if (item.sellIn < 0){
-                logger.info(" < 0 foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
+            // date 5
+            if (item.sellIn >= 0 && item.sellIn < 6   ){
+                item.quality = qualityBounded(item.quality,2);
+
+            }
+
+            // date 10 jours
+            if (item.sellIn > 5  && item.sellIn < 11){
+                item.quality = qualityBounded(item.quality,1);
+            }
+
+
+        // Red win Case
+        } else if (item.name.contains("Red red wine")) {
+            logger.info("Win Spotted");
+            if ( item.sellIn >= 300 && item.sellIn <= 600) {
+                item.quality++ ;
+            }else if ( item.sellIn < 0) {
+                item.quality--;
+            }
+        }
+
+        else{
+            logger.info("other foo");
+            if (item.sellIn < 0){ //
                 item.quality = qualityBounded(item.quality,-2);
-                logger.info("< 0  foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }else{
-                logger.info("foo before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
                 item.quality = qualityBounded(item.quality,-1);
-                logger.info("foo after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
             }
 
         }
-        // Sellin decrease in all cases
-        item  = downSellin(item , 1);
+
         return item;
     }
     /**
@@ -166,11 +268,17 @@ public class GildedRose {
         int minQuality = 0;
         int tempQuality = currentQuality + QualityMouvment;
 
-        if (tempQuality <= maxQuality && tempQuality >= minQuality){
-            return tempQuality;
+        if (tempQuality < 0) {
+             tempQuality = minQuality;
+        }
+        if (tempQuality > 50 ) {
+             tempQuality = maxQuality;
         }
 
-        return (Integer.signum(tempQuality) <= 0 ?  minQuality : maxQuality );
+        return tempQuality;
+
+
+
     }
     private Item downSellin(Item item ,int num){
         item.sellIn = item.sellIn - num;
