@@ -48,7 +48,7 @@ public class Item {
      *
      */
     protected void update(){
-
+        logger.debug("father Item logger ... ");
     }
 
 
