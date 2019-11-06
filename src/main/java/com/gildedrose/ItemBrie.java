@@ -14,9 +14,9 @@ public class ItemBrie extends Item {
         logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
 
         if(this.getSellIn() < 0){
-            doUpdate(this.getQuality(), 2);
+            doUpdate( 2);
         }else {
-            doUpdate(this.getQuality(), 1);
+            doUpdate( 1);
 
         }
 

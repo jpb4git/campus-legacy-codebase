@@ -57,17 +57,17 @@ public class Item {
      * return a calculate positive number
      * this number will never be more than 50
      *
-     * @param quality  current item
+     *
      * @param value can be negative or positive
      */
-    public void doUpdate(int quality, int value) {
-
+    public void doUpdate( int value) {
+        int quality;
         // #5
         if (Math.signum(value) > 0) {
-            quality = Math.min(quality + value, 50);
+            quality = Math.min(this.getQuality() + value, 50);
         } else {
             // #4
-           quality = Math.max(quality + value, 0);
+           quality = Math.max(this.getQuality() + value, 0);
         }
         this.setQuality(quality);
         logger.debug("DoUpdate NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);

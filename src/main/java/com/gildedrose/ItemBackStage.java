@@ -11,16 +11,16 @@ public class ItemBackStage extends Item {
 
         logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
         if (this.getSellIn() > 10) {
-            doUpdate(this.getQuality(), 1);
+            doUpdate( 1);
         } else if (this.getSellIn() > 5) {
-            doUpdate(this.getQuality(), 2);
+            doUpdate( 2);
 
         } else if (this.getSellIn()> 0) {
-            doUpdate(this.getQuality(), 3);
+            doUpdate( 3);
 
         } else {
             //#8
-            doUpdate(this.getQuality(), -this.getQuality());
+            doUpdate( -this.getQuality());
         }
 
     }

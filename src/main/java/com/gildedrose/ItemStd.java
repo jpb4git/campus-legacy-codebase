@@ -18,9 +18,9 @@ public class ItemStd extends Item {
         // #2
         if (this.getSellIn() < 0) {
             //#3
-           doUpdate(this.quality, -2);
+           doUpdate( -2);
         } else {
-           doUpdate(this.quality, -1);
+           doUpdate( -1);
         }
         // #2
 

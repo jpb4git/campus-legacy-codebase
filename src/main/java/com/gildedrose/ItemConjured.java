@@ -12,9 +12,9 @@ public class ItemConjured extends Item{
         logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
 
         if (this.sellIn < 0) {
-            doUpdate(this.getQuality(), -4);
+            doUpdate( -4);
         } else {
-            doUpdate(this.getQuality(), -2);
+            doUpdate( -2);
         }
     }
 }
