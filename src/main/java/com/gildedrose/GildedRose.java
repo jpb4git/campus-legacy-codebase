@@ -195,7 +195,17 @@ public class GildedRose {
             //nothing to do with quality
 
             // but we have to cancel the day sellIn decrease
-            item.sellIn++;
+            /**
+             correctif :
+                la méthode downSellin était placée  en fin de méthode
+                donc réduisait le sellin dans tous les cas de figure.
+                elle est placée, maintenant en début de cycle
+                nous devons annuler cette action dans ce cas particulier de Sulfuras
+                qui est flaggé  :  GMSFDLM                "God Mode Static Final De La Mort"
+             */
+             item.sellIn++;
+
+
         }else if (item.name.contains("Brie") ){
 
             //logger.info("Brie before : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);

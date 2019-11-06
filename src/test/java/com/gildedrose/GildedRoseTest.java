@@ -25,6 +25,7 @@ public class GildedRoseTest {
     }
 
     @Test
+    // have to check this rule on prod this morning
     void foo_date_Has_Passed_Quality_Degrade_Twice() {
         Item[] items = new Item[] { new Item("foo", -1, 10) };
         GildedRose app = new GildedRose(items);
