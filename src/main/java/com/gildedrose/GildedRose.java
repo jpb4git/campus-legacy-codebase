@@ -99,7 +99,7 @@ public class GildedRose {
                 }
                 // #2
 
-                logger.debug("OldVal : Sellin  {} , Quality {} , Item {}, SellIn : {}, Quality : {}",oldQl,oldSellIn, itemName, item.sellIn, item.quality);
+                logger.debug("Item {}, OldVal : Sellin  {} , Quality {} , , SellIn : {}, Quality : {}",itemName, oldQl,oldSellIn, item.sellIn, item.quality);
         }
 
     }
