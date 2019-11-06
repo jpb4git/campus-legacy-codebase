@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class GildedRose {
     Item[] items;
+    final Logger logger = LoggerFactory.getLogger(GildedRose.class);
+
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -24,8 +26,6 @@ public class GildedRose {
     }
 
     public void selectItem(Item item) {
-
-        final Logger logger = LoggerFactory.getLogger(GildedRose.class);
 
         // #1
         item.sellIn--;
