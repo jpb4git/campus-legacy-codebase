@@ -107,8 +107,7 @@ public class GildedRose {
             // #4
             item.quality = Math.max(item.quality + value, 0);
         }
-        logger.debug("New Quality : {}", item.quality);
-
+        logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", item.name, item.sellIn, item.quality);
 
     }
 
