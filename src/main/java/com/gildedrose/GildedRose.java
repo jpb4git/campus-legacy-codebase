@@ -38,7 +38,7 @@ public class GildedRose {
 
 
         logger.info("New Log");
-        logger.debug("Item {}, OldVal : Sellin  {} , Quality {} , , SellIn : {}, Quality : {}",itemName, oldQl,oldSellIn, item.sellIn, item.quality);
+
 
         switch (itemName) {
             //#4
@@ -99,8 +99,9 @@ public class GildedRose {
                 }
                 // #2
 
-                logger.debug("Item {}, OldVal : Sellin  {} , Quality {} , , SellIn : {}, Quality : {}",itemName, oldQl,oldSellIn, item.sellIn, item.quality);
+
         }
+        logger.debug("Item {}, oldSelling :  {} , oldQuality : {} , SellIn : {} ,Quality : {}",itemName,oldSellIn,oldQl, item.sellIn, item.quality);
 
     }
     //#3
