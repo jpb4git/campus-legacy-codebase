@@ -77,9 +77,10 @@ public class GildedRose {
             //#10
             case "Red red wine":
                 if(item.sellIn >= 300){
+                    item.quality++;
                     update(item, 1);
                 }else if(item.sellIn < 0){
-                    update(item, -1);
+                    item.quality--;
                 }
                 break;
 
@@ -107,11 +108,9 @@ public class GildedRose {
     public void update(Item item, int value) {
 
         // #5
-        if (Math.signum(value) > 0 && item.name != "Red red wine") {
+        if (Math.signum(value) > 0) {
             item.quality = Math.min(item.quality + value, 50);
-        } else if (item.name == "Red red wine"){
-            item.quality++;
-        }else {
+        } else {
             // #4
             item.quality = Math.max(item.quality + value, 0);
         }
