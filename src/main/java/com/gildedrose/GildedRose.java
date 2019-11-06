@@ -39,7 +39,13 @@ public class GildedRose {
         switch (itemName) {
             //#4
             case "Aged Brie":
-                update(item, 1);
+
+                if (item.sellIn < 0) {
+                    //#3
+                    update(item, 2);
+                } else {
+                    update(item, 1);
+                }
                 break;
             //#6
             case "Sulfuras, Hand of Ragnaros":
