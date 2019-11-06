@@ -90,7 +90,6 @@ public class GildedRose {
 
     }
     //#3
-
     /**
      * return a calculate positive number
      * this number will never be more than 50
