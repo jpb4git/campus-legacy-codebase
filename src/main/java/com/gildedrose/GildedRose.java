@@ -109,7 +109,9 @@ public class GildedRose {
         // #5
         if (Math.signum(value) > 0 && item.name != "Red red wine") {
             item.quality = Math.min(item.quality + value, 50);
-        } else {
+        } else if (item.name == "Red red wine"){
+            item.quality++;
+        }else {
             // #4
             item.quality = Math.max(item.quality + value, 0);
         }
