@@ -168,6 +168,7 @@ public class GildedRose {
         }
 */
 
+//
 
     public void updateQuality() {
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
@@ -181,9 +182,6 @@ public class GildedRose {
     private Item SelectItemByName(Item item){
 
         Logger logger = LoggerFactory.getLogger(GildedRose.class);
-
-        // Sellin decrease in all cases
-        item  = downSellin(item , 1);
 
 
         if (item.name.startsWith("Conjured") ){
@@ -219,6 +217,7 @@ public class GildedRose {
              */
             item.quality = qualityBounded(item.quality, 1); // à tester ce matin
             logger.info("brie after : Ql  : " + item.quality  + " | sellIn :  " + item.sellIn);
+
 
 
 
@@ -276,6 +275,8 @@ public class GildedRose {
             item.quality = qualityBounded(item.quality,-1);
         }
 
+        // Sellin decrease in all cases
+        item  = downSellin(item , 1);
         return item;
     }
     /**
