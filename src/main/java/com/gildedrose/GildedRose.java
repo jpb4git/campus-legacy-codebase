@@ -77,10 +77,10 @@ public class GildedRose {
             //#10
             case "Red red wine":
                 if(item.sellIn >= 300){
-                    item.quality++;
+                    item.quality++; // bypass update with range
 
                 }else if(item.sellIn < 0){
-                    item.quality--;
+                    item.quality--; // bypass update with range
                 }
                 break;
 
