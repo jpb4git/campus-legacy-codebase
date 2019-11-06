@@ -33,8 +33,12 @@ public class GildedRose {
         if (itemName.startsWith("Conjured ")) {
             itemName = "Conjured";
         }
+        int oldQl = item.quality;
+        int oldSellIn =item.sellIn;
+
+
         logger.info("New Log");
-        logger.debug("Item {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
+        logger.debug("OldVal : Sellin  {} , Quality {} , Item {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
 
         switch (itemName) {
             //#4
@@ -94,6 +98,8 @@ public class GildedRose {
                     update(item, -1);
                 }
                 // #2
+
+                logger.debug("OldVal : Sellin  {} , Quality {} , Item {}, SellIn : {}, Quality : {}",oldQl,oldSellIn, itemName, item.sellIn, item.quality);
         }
 
     }
