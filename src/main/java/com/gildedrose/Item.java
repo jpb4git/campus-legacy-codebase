@@ -74,4 +74,8 @@ public class Item {
 
     }
 
+    protected void minusSellIn(){
+        this.sellIn--;
+    }
+
 }

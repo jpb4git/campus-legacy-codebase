@@ -12,7 +12,7 @@ public class ItemStd extends Item {
     @Override
     protected void update(){
 
-        this.setSellIn(this.getSellIn() -1) ;
+        this.minusSellIn();
 
         logger.debug("NewVal :  Item {}, SellIn : {}, Quality : {}", this.name, this.sellIn, this.quality);
         // #2
