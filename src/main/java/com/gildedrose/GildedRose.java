@@ -25,6 +25,7 @@ public class GildedRose {
 
     public void selectItem(Item item) {
 
+        final Logger logger = LoggerFactory.getLogger(GildedRose.class);
 
         // #1
         item.sellIn--;
@@ -32,6 +33,7 @@ public class GildedRose {
         if (itemName.startsWith("Conjured ")) {
             itemName = "Conjured";
         }
+        logger.debug("Item is {}, SellIn : {}, Quality : {}", itemName, item.sellIn, item.quality);
 
         switch (itemName) {
             //#4
@@ -100,15 +102,17 @@ public class GildedRose {
 
         // #5
         if (Math.signum(value) > 0 && item.name != "Red red wine") {
-
             item.quality = Math.min(item.quality + value, 50);
         } else {
             // #4
             item.quality = Math.max(item.quality + value, 0);
         }
+        logger.debug("New Quality : {}", item.quality);
+
 
     }
 
 }
+
 
 
