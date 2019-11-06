@@ -216,6 +216,7 @@ public class GildedRose {
             // date dépassée
             logger.info("backstage :");
 
+            // add one quality in all case.
             item.quality = qualityBounded(item.quality,1);
 
             if (item.sellIn < 0){ // date depassée ql à 0
@@ -223,13 +224,13 @@ public class GildedRose {
 
             }
 
-            // date 5
+            // date  5
             if (item.sellIn >= 0 && item.sellIn < 6   ){
                 item.quality = qualityBounded(item.quality,2);
 
             }
 
-            // date 10 jours
+            // date 10
             if (item.sellIn > 5  && item.sellIn < 11){
                 item.quality = qualityBounded(item.quality,1);
             }
@@ -238,21 +239,31 @@ public class GildedRose {
         // Red win Case
         } else if (item.name.contains("Red red wine")) {
             logger.info("Win Spotted");
+
+            // 0 to 300 do nothing
+
+            // 300 to 600  add quality
             if ( item.sellIn >= 300 && item.sellIn <= 600) {
-                item.quality++ ;
+                item.quality++ ; // don't care about 50 limitation (bypass qualityBounded method )
+
+            // <  0 decrease quality
             }else if ( item.sellIn < 0) {
-                item.quality--;
+                item.quality--; // don't care about 50 limitation (bypass qualityBounded method )
             }
+
         }
 
         else{
-            logger.info("other foo");
-            if (item.sellIn < 0){ //
+            logger.info("other foo ");
+
+            /*if (item.sellIn < 0){ //
                 item.quality = qualityBounded(item.quality,-2);
             }else{
                 item.quality = qualityBounded(item.quality,-1);
             }
-
+            */
+            // on decrease la qualité
+            item.quality = qualityBounded(item.quality,-1);
         }
 
         return item;
