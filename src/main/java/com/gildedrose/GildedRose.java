@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Range.closedOpen;
+import static com.google.common.collect.Range.openClosed;
+
 
 public class GildedRose {
     Item[] items;
@@ -18,26 +21,30 @@ public class GildedRose {
     //private List<Item> typedItems;
     protected List<Rules> listRules;
     protected List<Rule> SulfurasRules = new ArrayList<>();
-    protected List<Rule> brieRules = new ArrayList<>();
+
+
+
     protected List<Rule> backstageRules = new ArrayList<>();
     protected List<Rule> conjuredRules = new ArrayList<>();
     protected List<Rule> redWineRules = new ArrayList<>();
     protected List<Rule> stdRules = new ArrayList<>();
 
+    //protected  RuleDictionary rd;
 
     public GildedRose(Item[] items) {
         this.items = items;
 
-        //typedItems = Arrays.stream(items).map(item -> getItemFactory(item)).collect(Collectors.toList());
+
         defineRules();
         listRules = Arrays.stream(items).map(item -> getRulesFactory(item)).collect(Collectors.toList());
 
     }
 
+
     public void updateQuality() {
 
-        for (Rules rules : listRules) {
-            rules.update();
+        for (Item item : items) {
+            getRulesFactory(item).update(item);
         }
     }
 
@@ -54,22 +61,23 @@ public class GildedRose {
 
         switch (itemName) {
             case "Sulfuras, Hand of Ragnaros":
-                return new Rules(item, SulfurasRules, sellin -> sellin);
+                return RuleDictionary.SULFURAS;
 
             case "Aged Brie":
-                return new Rules(item, brieRules, sellin -> sellin -1);
+                return RuleDictionary.BRIE;
 
             case "Backstage passes to a TAFKAL80ETC concert":
-                return new Rules(item, backstageRules, sellin -> sellin -1);
+                return RuleDictionary.BACKSTAGE;
 
             case "Conjured":
-                return new Rules(item, conjuredRules, sellin -> sellin -1);
+                return RuleDictionary.CONJURED;
 
             case "Red red wine":
-                return new Rules(item, redWineRules, sellin -> sellin -1);
+                return RuleDictionary.REDWINE;
 
             default:
-                return new Rules(item, stdRules, sellin -> sellin -1);
+
+                return RuleDictionary.STDITEM;
         }
     }
 
@@ -79,86 +87,24 @@ public class GildedRose {
 
 
 
-        Rule BrieRange1 = new Rule(
-                Range.openClosed(Integer.MIN_VALUE, 0),
-                quality -> Math.min( quality + 2 , 50)) ;
-
-
-        Rule BrieRange2 = new Rule(
-                Range.closedOpen(0, Integer.MAX_VALUE),
-                quality -> Math.min(quality + 1,50 )  );
-
-        this.brieRules.add(BrieRange1);
-        this.brieRules.add(BrieRange2);
 
         //Backstage
 
-        Rule Backstage1 = new Rule(
-                Range.openClosed(Integer.MIN_VALUE, 0),
-                 quality -> 0);
-
-        Rule Backstage2 = new Rule(
-                Range.openClosed(0, 5),
-                quality -> Math.min(quality + 3 , 50 ));
-
-        Rule Backstage3 = new Rule(
-                Range.openClosed(5, 10),
-                quality -> Math.min( quality + 2, 50) );
-
-        Rule Backstage4 = new Rule(
-                Range.open(10, Integer.MAX_VALUE),
-                quality -> Math.min( quality + 1 , 50 ) );
 
 
-        backstageRules.add(Backstage1);
-        backstageRules.add(Backstage2);
-        backstageRules.add(Backstage3);
-        backstageRules.add(Backstage4);
+
 
         //Conjured
 
-        Rule Conjured1 = new Rule(
-                Range.open(Integer.MIN_VALUE, 0),
-                quality -> Math.max(quality - 4,0) );
-
-        Rule Conjured2 = new Rule(
-                Range.closedOpen(0, Integer.MAX_VALUE),
-                quality -> Math.max( quality - 2 ,0 ));
-
-        conjuredRules.add(Conjured1);
-        conjuredRules.add(Conjured2);
 
 
         //Redwine
 
-        Rule Redwine1 = new Rule(
-                Range.open(Integer.MIN_VALUE, 0),
-                quality -> quality - 1);
 
-        Rule Redwine2 = new Rule(
-                Range.closedOpen(0, 300),
-                quality -> quality + 0);
-
-        Rule Redwine3 = new Rule(
-                Range.closed(300, 600),
-                quality -> quality + 1);
-
-        redWineRules.add(Redwine1);
-        redWineRules.add(Redwine2);
-        redWineRules.add(Redwine3);
 
         //Standard
 
-        Rule Standard1 = new Rule(
-                Range.open(Integer.MIN_VALUE, 0),
-                quality ->  Math.max( quality - 2, 0) );
 
-        Rule Standard2 = new Rule(
-                Range.closedOpen(0, Integer.MAX_VALUE),
-                quality ->  Math.max(quality - 1 , 0));
-
-        stdRules.add(Standard1);
-        stdRules.add(Standard2);
 
     }
 

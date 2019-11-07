@@ -1,10 +1,22 @@
 package com.gildedrose;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.List;
 
 public class Rules{
 
-    private Item    item;
+    /**
+     *
+     * @param actionSellin
+     * @param rules
+     * @return
+     */
+    public static Rules of( ActionSellin actionSellin, Rule... rules) {
+        // return the  constructor result
+        return new Rules(ImmutableList.copyOf(rules), actionSellin);
+    }
+
     private List<Rule> listRules;
     protected ActionSellin actionSellin;
 
@@ -16,14 +28,13 @@ public class Rules{
 
 
 
-    public Rules(Item item, List<Rule> listRules, ActionSellin actionSellin) {
-        this.item = item;
+    public Rules(List<Rule> listRules, ActionSellin actionSellin) {
         this.listRules = listRules;
         this.actionSellin = actionSellin;
 
     }
 
-    public Item update(){
+    public Item update(Item item){
 
         item.sellIn = actionSellin.execution(item.sellIn);
         int tempSellin = item.sellIn;
