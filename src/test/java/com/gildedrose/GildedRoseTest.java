@@ -80,6 +80,7 @@ public class GildedRoseTest {
         assertThat(app.items[0].sellIn).isEqualTo(-2);
         assertThat(app.items[0].quality).isEqualTo(0);
     }
+
     ///////////////////////////////////////////////////////////////////////////////////
     //#4
     @Test
