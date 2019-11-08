@@ -17,25 +17,14 @@ import static com.google.common.collect.Range.openClosed;
 
 public class GildedRose {
     Item[] items;
-    final Logger logger = LoggerFactory.getLogger(GildedRose.class);
-    //private List<Item> typedItems;
+
+
     protected List<Rules> listRules;
-    protected List<Rule> SulfurasRules = new ArrayList<>();
 
-
-
-    protected List<Rule> backstageRules = new ArrayList<>();
-    protected List<Rule> conjuredRules = new ArrayList<>();
-    protected List<Rule> redWineRules = new ArrayList<>();
-    protected List<Rule> stdRules = new ArrayList<>();
-
-    //protected  RuleDictionary rd;
 
     public GildedRose(Item[] items) {
         this.items = items;
-
-
-        defineRules();
+        // create  a list of Rule for a specific item fro mgetRulesFactory
         listRules = Arrays.stream(items).map(item -> getRulesFactory(item)).collect(Collectors.toList());
 
     }
@@ -81,32 +70,6 @@ public class GildedRose {
         }
     }
 
-    private void defineRules() {
-
-        //Brie
-
-
-
-
-        //Backstage
-
-
-
-
-
-        //Conjured
-
-
-
-        //Redwine
-
-
-
-        //Standard
-
-
-
-    }
 
 
 

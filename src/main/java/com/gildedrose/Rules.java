@@ -8,12 +8,13 @@ public class Rules{
 
     /**
      *
+     *
      * @param actionSellin
      * @param rules
      * @return
      */
     public static Rules of( ActionSellin actionSellin, Rule... rules) {
-        // return the  constructor result
+        // return the  constructor result with a copy
         return new Rules(ImmutableList.copyOf(rules), actionSellin);
     }
 
@@ -34,6 +35,11 @@ public class Rules{
 
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     public Item update(Item item){
 
         item.sellIn = actionSellin.execution(item.sellIn);
@@ -41,8 +47,14 @@ public class Rules{
 
         for (Rule rule: listRules) {
 
+            /**
+             *
+             * test if tempSellin is in existing rule.range
+             * and apply change to temp
+             *
+             */
             if (rule.range.contains(tempSellin)){
-                //PROBABLE BUG
+
                item.quality =  rule.action.execution(item.quality);
 
             }
